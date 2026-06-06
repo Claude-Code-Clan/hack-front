@@ -17,9 +17,7 @@ export const widgetTypes = [
   'parking',
   'storage',
   'weather',
-  'camera',
-  'other',
-  'ads'
+  'camera'
 ] as const;
 
 export type WidgetTypes = typeof widgetTypes[number];

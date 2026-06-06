@@ -6,6 +6,8 @@ import StaticInfoWidget from "../../widgets/StaticInfoWidget/StaticInfoWindget.t
 import ParkingWidget from "../../widgets/ParkingWidget/ParkingWidget.tsx";
 import StorageWidget from "../../widgets/StorageWidget/StorageWidget.tsx";
 import WeatherWidget from "../../widgets/WeatherWidget/WeatherWidget.tsx";
+import ReactHlsPlayer from 'react-hls-player';
+import {useRef} from "react";
 
 interface HUWidgetSelectorProps {
     type?: WidgetTypes;
@@ -36,32 +38,19 @@ export default function HUWidgetsSelector({type, children}: HUWidgetSelectorProp
             )
 
         case 'camera':
+            const playerRef = useRef<any>(null);
             return (
                 <div className={cn(cls.wrapper, 'handle')}>
-                    <div className={cls.header}>
-                        <div>Трансляция с камеры</div>
-                    </div>
-                    {children}
-                </div>
-            )
-
-        case 'other':
-            return (
-                <div className={cn(cls.wrapper, 'handle')}>
-                    <div className={cls.header}>
-                        <div>Другое</div>
-                    </div>
-                    {children}
-                </div>
-            )
-
-        case 'ads':
-            return (
-                <div className={cn(cls.wrapper, 'handle')}>
-                    <div className={cls.header}>
-                        <div>Реклама</div>
-                    </div>
-                    {children}
+                    <ReactHlsPlayer
+                        playerRef={playerRef}
+                        src="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
+                        autoPlay={true}
+                        controls={true}
+                        muted={true}
+                        width="100%"
+                        height="auto"
+                        style={{borderRadius: '20px'}}
+                    />
                 </div>
             )
 

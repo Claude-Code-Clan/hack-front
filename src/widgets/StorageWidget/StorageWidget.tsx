@@ -1,5 +1,5 @@
 import cls from './StorageWidget.module.css';
-import {Carousel, Typography} from "antd";
+import {Carousel, Flex, Typography} from "antd";
 
 
 export interface StorageI {
@@ -10,8 +10,11 @@ export interface StorageI {
 function StorageItem({title, availableStorage}: StorageI) {
     return (
         <div>
-            <Typography.Paragraph>{title}</Typography.Paragraph>
-            <Typography.Title>{availableStorage}</Typography.Title>
+            <Flex vertical gap={4}>
+                <Typography.Paragraph>{title}</Typography.Paragraph>
+                <Typography.Title level={4}>{availableStorage}</Typography.Title>
+            </Flex>
+
         </div>
     );
 }
