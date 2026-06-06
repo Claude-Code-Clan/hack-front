@@ -5,6 +5,7 @@ import NewsWidget from "../../widgets/NewsWidget/NewsWidget.tsx";
 import StaticInfoWidget from "../../widgets/StaticInfoWidget/StaticInfoWindget.tsx";
 import ParkingWidget from "../../widgets/ParkingWidget/ParkingWidget.tsx";
 import StorageWidget from "../../widgets/StorageWidget/StorageWidget.tsx";
+import WeatherWidget from "../../widgets/WeatherWidget/WeatherWidget.tsx";
 
 interface HUWidgetSelectorProps {
     type?: WidgetTypes;
@@ -31,12 +32,7 @@ export default function HUWidgetsSelector({type, children}: HUWidgetSelectorProp
 
         case 'weather':
             return (
-                <div className={cn(cls.wrapper, 'handle')}>
-                    <div className={cls.header}>
-                        <div>Яндекс Погода</div>
-                    </div>
-                    {children}
-                </div>
+                <WeatherWidget/>
             )
 
         case 'camera':

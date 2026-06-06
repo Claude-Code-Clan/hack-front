@@ -37,7 +37,7 @@ export const layouts = [
 ];
 
 const types: WidgetType[] = [{
-  type: 'storage',
+  type: 'weather',
   widgetId: 'widget-1',
 }];
 
