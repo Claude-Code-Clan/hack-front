@@ -1,15 +1,33 @@
 import type {PropsWithChildren} from "react";
 import cls from './HUWidgetContainer.module.css';
-import {HolderOutlined} from "@ant-design/icons";
+import {DeleteOutlined, HolderOutlined, UserOutlined} from "@ant-design/icons";
 import cn from 'classnames';
-import {Card} from "antd";
+import {Button, Card} from "antd";
 
-export default function HUWidgetContainer({children}: PropsWithChildren) {
+interface HUWidgetContainerPropsI {
+  onDelete?: () => void;
+}
+
+export default function HUWidgetContainer({children, onDelete}: PropsWithChildren<HUWidgetContainerPropsI>) {
   return (
-    <Card className={cls.wrapper}>
-      <div className={cn(cls.dragHolder, 'drag-handle')}>
-        <HolderOutlined/>
-      </div>
+    <Card
+      title={
+        <div className={cn(cls.dragHolder, 'drag-handle')}>
+          <Button
+            type='text'
+            icon={<HolderOutlined/>}
+          />
+          {onDelete &&
+            (<Button
+              onClick={onDelete}
+              type='text'
+              icon={<DeleteOutlined/>}
+            />)
+          }
+        </div>
+      }
+      className={cls.wrapper}
+    >
       <p>
         {children}
       </p>
