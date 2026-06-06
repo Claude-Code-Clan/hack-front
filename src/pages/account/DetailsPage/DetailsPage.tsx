@@ -1,12 +1,12 @@
 import {Button, Divider, Drawer, Flex, Input, Typography} from 'antd';
 
 import {observer} from "mobx-react";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import WidgetsStore, {WidgetTypes, widgetTypes} from "../../../store/widgetsStore.ts";
 import cls from './DetailsPage.module.css';
 import GridLayoutContainer from "../GridLayoutContainer/GridLayoutContainer.tsx";
-import {DownloadOutlined, PlusOutlined, RightOutlined, SaveOutlined} from "@ant-design/icons";
-import {useNavigate} from "react-router";
+import {CloudUploadOutlined, DownloadOutlined, PlusOutlined, RightOutlined, SaveOutlined} from "@ant-design/icons";
+import {useNavigate, useSearchParams} from "react-router";
 
 
 const DetailsPage = observer(() => {
@@ -16,6 +16,8 @@ const DetailsPage = observer(() => {
   const [confName, setConfName] = useState('');
   const savedConfigs = WidgetsStore.getSavedConfigurations();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const devicesIds = searchParams.getAll('devices').map(Number);
 
   const showDrawer = () => {
     setOpen(true);
@@ -64,6 +66,17 @@ const DetailsPage = observer(() => {
     setOpenLoadSavedDraver(false);
   }
 
+  const onLoadSavedConfiguration = () => {
+    if (devicesIds.length === 0) return;
+    void WidgetsStore.loadSavedConfigurationToDisplays(devicesIds).finally(() => {
+      navigate('/account');
+    });
+  }
+
+  useEffect(() => {
+    console.log('devicesIds', devicesIds);
+  }, [devicesIds]);
+
   return (
     <div className={cls.wrapper}>
       <Typography.Title level={4}>Выберите или создайте конфигурацию для загрузки на устройства</Typography.Title>
@@ -80,6 +93,12 @@ const DetailsPage = observer(() => {
         >
           Загрузить сохраненную
         </Button>
+        {devicesIds.length !== 0 &&<Button
+          icon={<CloudUploadOutlined/>}
+          onClick={onLoadSavedConfiguration}
+        >
+          Загрузить на экраны
+        </Button>}
       </Flex>
       <Drawer
         title="Добавить новый виджет"

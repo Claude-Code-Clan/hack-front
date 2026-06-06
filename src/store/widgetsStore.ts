@@ -1,5 +1,8 @@
 import {makeAutoObservable} from "mobx";
 import {Layout, LayoutItem} from "react-grid-layout";
+import BuildingService, {type LoadConfigurationToDisplaysRequestI} from "../api/buildingService.ts";
+import NotificationStore from "./notificationStore.ts";
+import ErrorHandler, {ErrorI} from "../utils/errorHandler.ts";
 
 interface WidgetType {
   type: WidgetTypes;
@@ -41,6 +44,7 @@ const types: WidgetType[] = [{
 class WidgetsStore {
   private _widgetsLayout: LayoutItem[] = layouts;
   private _widgetsTypes: WidgetType[] = types;
+  private readonly _errorHandler = new ErrorHandler();
 
   constructor() {
     makeAutoObservable(this);
@@ -60,6 +64,29 @@ class WidgetsStore {
 
   set widgetsTypes(widgetsTypes: WidgetType[]) {
     this._widgetsTypes = widgetsTypes;
+  }
+
+  async loadSavedConfigurationToDisplays(data: LoadConfigurationToDisplaysRequestI['displayIds']): Promise<void> {
+    try {
+      NotificationStore.isLoading = true;
+      const widgets = this._widgetsLayout.map((layout) => {
+        const type = this.getWidgetType(layout.i);
+        if (!type) throw new Error('Widget type not found');
+        return {
+          type,
+          x: layout.x,
+          y: layout.y,
+          w: layout.w,
+          h: layout.h,
+        }
+      })
+      await     BuildingService.loadConfigurationToDisplays({displayIds: data, widgets});
+      NotificationStore.isLoading = false;
+    } catch (e: unknown) {
+      NotificationStore.isLoading = false;
+      const errorsConfig: ErrorI[] = [{errorText: 'Не удалось сохранить на экраны'}];
+      this._errorHandler.handleError(e, errorsConfig);
+    }
   }
 
   clearConfiguration() {
