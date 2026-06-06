@@ -89,6 +89,12 @@ class WidgetsStore {
     this._widgetsTypes = savedConf?.types ?? [];
   }
 
+  deleteSavedConfigByIndex(index: number): void {
+    const savedConf = this.getSavedConfigurations()?.[index];
+    localStorage.removeItem(savedConf.uuid);
+
+  }
+
   replaceConfigSaveByIndex(index: number) {
     const savedConf = this.getSavedConfigurations()?.[index];
     this.replaceConfigSaveByUuid(savedConf.uuid);

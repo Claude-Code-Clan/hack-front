@@ -1,16 +1,21 @@
-import {Button, Drawer, Flex, Typography} from 'antd';
+import {Button, Divider, Drawer, Flex, Input, Typography} from 'antd';
 
 import {observer} from "mobx-react";
 import {useState} from "react";
 import WidgetsStore, {WidgetTypes, widgetTypes} from "../../../store/widgetsStore.ts";
 import cls from './DetailsPage.module.css';
 import GridLayoutContainer from "../GridLayoutContainer/GridLayoutContainer.tsx";
-import {PlusOutlined, SaveOutlined} from "@ant-design/icons";
+import {PlusOutlined, RightOutlined, SaveOutlined} from "@ant-design/icons";
+import {useNavigate} from "react-router";
 
 
 
 const DetailsPage = observer(() => {
   const [open, setOpen] = useState(false);
+  const [openSaveDraver, setOpenSaveDraver] = useState(false);
+  const [confName, setConfName] = useState('');
+  const savedConfigs = WidgetsStore.getSavedConfigurations();
+  const navigate = useNavigate();
 
   const showDrawer = () => {
     setOpen(true);
@@ -19,6 +24,11 @@ const DetailsPage = observer(() => {
   const onClose = () => {
     setOpen(false);
   };
+
+  function onCloseSaveDriver() {
+    setOpenSaveDraver(false);
+    setConfName('');
+  }
 
   const addWidget = (type: WidgetTypes) => {
     WidgetsStore.addWidget(type, {
@@ -29,9 +39,20 @@ const DetailsPage = observer(() => {
     })
   }
 
-  const saveConfiguration = () => {
-    WidgetsStore.saveConfiguration('Teст');
-    console.log(WidgetsStore.getSavedConfigurations())
+  const onClickSaveConfiguration = () => {
+    setOpenSaveDraver(true);
+  }
+
+  const onSaveConfiguration = () => {
+    WidgetsStore.saveConfiguration(confName);
+    onCloseSaveDriver();
+    navigate('/account/configurations');
+  }
+
+  const onSaveExistedConfiguration = (index: number) => {
+    WidgetsStore.replaceConfigSaveByIndex(index);
+    onCloseSaveDriver();
+    navigate('/account/configurations');
   }
 
   return (
@@ -40,7 +61,7 @@ const DetailsPage = observer(() => {
           <Button type="primary" onClick={showDrawer}>
             Добавить виджет
           </Button>
-          <Button icon={<SaveOutlined />} onClick={saveConfiguration}>
+          <Button icon={<SaveOutlined />} onClick={onClickSaveConfiguration}>
             Сохранить конфигурацию
           </Button>
         </Flex>
@@ -60,9 +81,38 @@ const DetailsPage = observer(() => {
                       </Flex>
                   ))}
               </div>
-
-
           </Drawer>
+
+        <Drawer
+          title="Сохранить конфигурацию"
+          closable={{'aria-label': 'Close Button'}}
+          onClose={onCloseSaveDriver}
+          open={openSaveDraver}
+        >
+          <Flex gap={15} vertical>
+            <Input onChange={(e) => setConfName(e.target.value)} placeholder="Название конфигурации"/>
+            <Button onClick={onSaveConfiguration} type='primary'>Сохранить новую</Button>
+            {savedConfigs.length !== 0 && <Typography.Title level={5}>Обновить текущую</Typography.Title>}
+            {savedConfigs?.map((conf, index) => {
+              return (
+                <Flex vertical style={{width: '100%'}}>
+                  <Flex align='center' justify='space-between'>
+                    <Flex vertical>
+                      <Typography.Title level={5}>{conf.name}</Typography.Title>
+                    </Flex>
+                    <Button
+                      onClick={() => onSaveExistedConfiguration(index)}
+                      type='text'
+                      icon={<RightOutlined/>}
+                    />
+                  </Flex>
+                  <Divider/>
+                </Flex>
+              )
+            })}
+          </Flex>
+        </Drawer>
+
           <GridLayoutContainer/>
       </div>
   )

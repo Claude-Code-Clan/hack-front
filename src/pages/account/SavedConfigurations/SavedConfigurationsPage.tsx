@@ -37,7 +37,7 @@ const SavedConfigurationsPage = observer(() => {
     <Flex gap={50} vertical align='flex-start' flex='grow' style={{width: '100%', height: '100%'}}>
       <Button onClick={() => navigate('/account/create-config')} icon={<PlusOutlined />} type='primary'>Создать конфигурацию</Button>
 
-      <Flex vertical align='center' justify='center' style={{width: '100%', height: '100%'}}>
+      <Flex vertical align='center' justify='flex-start' style={{width: '100%', height: '100%'}}>
         {savedConfigs?.length === 0 ? <Empty/> : (savedConfigs?.map((conf, index) => {
             return <SavedConfigItem key={`${index}_conf`} confId={index} name={conf.name}/>
           })
