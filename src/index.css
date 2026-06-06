@@ -4,6 +4,10 @@
   --bg-color: white;
 }
 
+.react-grid-item > .react-resizable-handle.react-resizable-handle-se {
+  z-index: 100000 !important;
+}
+
 * {
   box-sizing: border-box;
 }
