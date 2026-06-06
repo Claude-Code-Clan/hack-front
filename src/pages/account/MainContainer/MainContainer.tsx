@@ -1,18 +1,19 @@
 import {Button, Flex, Segmented, Space, Switch, Typography} from 'antd';
 import {
+  ControlOutlined,
   HomeOutlined,
-  LineChartOutlined,
   LoadingOutlined,
   MoonOutlined,
   SunOutlined,
   UserOutlined,
 } from '@ant-design/icons';
 import {Outlet, useLocation, useNavigate} from 'react-router';
-import {SegmentedLabeledOption} from 'rc-segmented';
+
 import cls from './MainContainer.module.css';
 import {useEffect, useState} from 'react';
 import {observer} from 'mobx-react';
 import ConfigStore from '../../../store/configStore.ts';
+import type {SegmentedLabeledOption} from "antd/es/segmented";
 
 const segmentedConfig: SegmentedLabeledOption<string>[] = [
   {
@@ -28,12 +29,12 @@ const segmentedConfig: SegmentedLabeledOption<string>[] = [
   {
     label: (
       <Space>
-        <LineChartOutlined/>
-        Детализация
+        <ControlOutlined/>
+        Выбранное устройство
       </Space>
     ),
     value: 'details',
-    disabled: false,
+    disabled: true,
   },
 ];
 

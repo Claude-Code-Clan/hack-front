@@ -1,10 +1,14 @@
-import {Flex, Tree, TreeDataNode, type TreeProps} from "antd";
+import {Button, Flex, Tree, TreeDataNode, type TreeProps} from "antd";
 import DevicesStore from "../../../store/devicesStore.ts";
-import {useMemo} from "react";
+import {useMemo, useState} from "react";
 import {observer} from "mobx-react";
 import type {Key} from "antd/es/masonry/Masonry";
+import {RightOutlined} from "@ant-design/icons";
+import {useNavigate} from "react-router";
 
 const DistributionPage = observer(() => {
+  const navigate = useNavigate();
+  const [selectedDevices, setSelectedDevices] = useState<number[]>([]);
   const buildings = DevicesStore.buildings;
   const deviceTree = useMemo(() => {
     const tree: TreeDataNode[] = [];
@@ -13,11 +17,11 @@ const DistributionPage = observer(() => {
         title: building.buildingAddress,
         key: `building_${building.id}`,
         children: building.Entrances.map(entrance => {
-          return({
+          return ({
             title: `Номер подъезда ${entrance.entranceNumber}`,
             key: `entrance_${entrance.id}`,
             children: entrance.devices.map(device => {
-              return({
+              return ({
                 title: device.deviceType,
                 key: device.id,
               })
@@ -33,16 +37,28 @@ const DistributionPage = observer(() => {
   //@ts-ignore
   const onCheck: () => TreeProps['onCheck'] = (checkedKeys: Key[]) => {
     const devicesIds = checkedKeys.filter(key => typeof key === 'number');
-    console.log('onCheck', devicesIds);
+    setSelectedDevices(devicesIds);
   };
 
+  function navigateToConfigureScreens() {
+    const params = selectedDevices.map(id => `devices=${id}`).join('&');
+    navigate(`details?${params}`);
+  }
+
   return (
-    <Flex>
+    <Flex justify='space-between'>
       <Tree
         checkable
         onCheck={onCheck}
         treeData={deviceTree}
       />
+      <Button
+        onClick={navigateToConfigureScreens}
+        disabled={selectedDevices.length === 0}
+        icon={<RightOutlined />}
+      >
+        Сконфигурировать экран
+      </Button>
     </Flex>
   );
 });

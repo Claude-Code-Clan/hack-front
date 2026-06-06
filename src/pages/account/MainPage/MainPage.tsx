@@ -18,7 +18,7 @@ const MainPage = observer(() => {
       </Splitter.Panel>
       <Splitter.Panel>
         <Flex vertical style={{padding: '0 10px'}}>
-          <Typography.Title level={4}>Выполнить рассылку</Typography.Title>
+          <Typography.Title level={4}>Рассылка экранов</Typography.Title>
           <DistributionPage/>
         </Flex>
       </Splitter.Panel>

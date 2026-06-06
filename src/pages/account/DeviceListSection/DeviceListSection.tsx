@@ -3,15 +3,19 @@ import {RightOutlined} from "@ant-design/icons";
 import {observer} from "mobx-react";
 import DevicesStore from "../../../store/devicesStore.ts";
 import {useEffect, useState} from "react";
+import {useNavigate} from "react-router";
 
 interface DeviceItemPropsI {
+  deviceId: number
   deviceType: string
   buildingAddress: string
   buildingNumber: number
   entranceNumber: number
 }
 
-function DeviceItem({deviceType, buildingNumber, entranceNumber, buildingAddress}: DeviceItemPropsI) {
+function DeviceItem({deviceId, deviceType, buildingNumber, entranceNumber, buildingAddress}: DeviceItemPropsI) {
+  const navigate = useNavigate();
+
   return (
     <Flex vertical>
       <Flex align='center' justify='space-between'>
@@ -20,7 +24,11 @@ function DeviceItem({deviceType, buildingNumber, entranceNumber, buildingAddress
           <Typography.Text type='secondary'>{buildingAddress} {buildingNumber},
             подъезд {entranceNumber}</Typography.Text>
         </Flex>
-        <Button type='text' icon={<RightOutlined/>}/>
+        <Button
+          onClick={() => navigate(`details?devices=${deviceId}`)}
+          type='text'
+          icon={<RightOutlined/>}
+        />
       </Flex>
       <Divider/>
     </Flex>
@@ -50,6 +58,7 @@ const DeviceListSection = observer(() => {
           buildingNumber={device.buildingNumber}
           entranceNumber={device.entranceNumber}
           buildingAddress={device.buildingAddress}
+          deviceId={device.deviceId}
         />
       ))}
     </Flex>
