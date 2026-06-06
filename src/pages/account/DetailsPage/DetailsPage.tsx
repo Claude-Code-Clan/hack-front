@@ -1,10 +1,11 @@
-import {Button, Drawer} from 'antd';
+import {Button, Drawer, Flex, Typography} from 'antd';
 
 import {observer} from "mobx-react";
 import {useState} from "react";
-import WidgetsStore from "../../../store/widgetsStore.ts";
+import WidgetsStore, {WidgetTypes, widgetTypes} from "../../../store/widgetsStore.ts";
 import cls from "../MainPage/mainPage.module.css";
 import GridLayoutContainer from "../GridLayoutContainer/GridLayoutContainer.tsx";
+import {PlusOutlined} from "@ant-design/icons";
 
 
 const DetailsPage = observer(() => {
@@ -18,8 +19,8 @@ const DetailsPage = observer(() => {
     setOpen(false);
   };
 
-  const addWidget = () => {
-    WidgetsStore.addWidget('ads', {
+  const addWidget = (type: WidgetTypes) => {
+    WidgetsStore.addWidget(type, {
       x: 0,
       y: 0,
       w: 1,
@@ -28,20 +29,31 @@ const DetailsPage = observer(() => {
   }
 
   return (
-    <div className={cls.wrapper}>
-      <Button type="primary" onClick={showDrawer}>
-        Добавить виджет
-      </Button>
-      <Drawer
-        title="Basic Drawer"
-        closable={{'aria-label': 'Close Button'}}
-        onClose={onClose}
-        open={open}
-      >
-        <Button type="primary" onClick={addWidget}>Добавить виджет</Button>
-      </Drawer>
-      <GridLayoutContainer/>
-    </div>
+      <div className={cls.wrapper}>
+          <Button type="primary" onClick={showDrawer}>
+              Добавить виджет
+          </Button>
+          <Drawer
+              title="Добавить новый виджет"
+              closable={{'aria-label': 'Close Button'}}
+              onClose={onClose}
+              open={open}
+          >
+              <div>
+                  {widgetTypes.map((widget) => (
+                      <Flex vertical>
+                          <Flex align="center" justify="space-between">
+                              <Typography.Text>Добавить виджет {widget}</Typography.Text>
+                              <Button type='text' key={widget} onClick={() => addWidget(widget)} icon={<PlusOutlined/>}/>
+                          </Flex>
+                      </Flex>
+                  ))}
+              </div>
+
+
+          </Drawer>
+          <GridLayoutContainer/>
+      </div>
   )
 });
 
