@@ -50,10 +50,10 @@ function MainContainer() {
     );
   }, [location]);
 
-  // useEffect(() => {
-  //   const isLoading = ApartmentStore.isLoading;
-  //   setIsLoadingGlobal(isLoading);
-  // }, [ApartmentStore.isLoading]);
+  useEffect(() => {
+    const isLoading = false;
+    setIsLoadingGlobal(isLoading);
+  }, []);
 
   return (
     <>

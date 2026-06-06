@@ -1,6 +1,6 @@
 import type {PropsWithChildren} from "react";
 import cls from './HUWidgetContainer.module.css';
-import {DeleteOutlined, HolderOutlined, UserOutlined} from "@ant-design/icons";
+import {DeleteOutlined, HolderOutlined} from "@ant-design/icons";
 import cn from 'classnames';
 import {Button, Card} from "antd";
 

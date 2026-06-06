@@ -1,9 +1,9 @@
 import cn from "classnames";
 import cls from "../WidgetsSelector/HUWidgetsSelector.module.css";
-
+import type {WidgetTypes} from "../../store/widgetsStore.ts";
 
 interface HUWidgetSelectorProps {
-    type: string;
+    type?: WidgetTypes;
     children?: React.ReactNode;
 }
 
@@ -88,5 +88,8 @@ export default function HUWidgetsSelector({type, children}: HUWidgetSelectorProp
                     {children}
                 </div>
             )
+
+      default:
+        return null
     }
 }

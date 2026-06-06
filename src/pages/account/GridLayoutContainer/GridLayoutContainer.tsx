@@ -7,18 +7,8 @@ import "react-grid-layout/css/styles.css";
 import HUWidgetContainer from "../../../components/HUWidgetContainer/HUWidgetContainer.tsx";
 import {observer} from "mobx-react";
 import WidgetsStore from "../../../store/widgetsStore.ts";
+import HUWidgetsSelector from "../../../components/WidgetsSelector/HUWidgetsSelector.tsx";
 
-export const layouts = [
-  {
-    i: "widget-1",
-    x: 0,
-    y: 0,
-    w: 2,
-    h: 1,
-    isDraggable: true,
-    isResizable: true,
-  },
-];
 
 const dragConfig = {
   handle: ".drag-handle",
@@ -66,7 +56,7 @@ const GridLayoutContainer = observer(({}: GridLayoutPropsI) => {
         {layouts.lg.map((item) => (
           <div key={item.i}>
             <HUWidgetContainer onDelete={() => WidgetsStore.deleteWidget(item.i)}>
-              Kek {item.i}
+              <HUWidgetsSelector type={WidgetsStore.getWidgetType(item.i)}/>
             </HUWidgetContainer>
           </div>
         ))}
