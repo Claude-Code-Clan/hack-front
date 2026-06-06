@@ -7,6 +7,7 @@ import cls from './DetailsPage.module.css';
 import GridLayoutContainer from "../GridLayoutContainer/GridLayoutContainer.tsx";
 import {CloudUploadOutlined, DownloadOutlined, PlusOutlined, RightOutlined, SaveOutlined} from "@ant-design/icons";
 import {useNavigate, useSearchParams} from "react-router";
+import DevicesStore from "../../../store/devicesStore.ts";
 
 
 const DetailsPage = observer(() => {
@@ -19,6 +20,8 @@ const DetailsPage = observer(() => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const devicesIds = searchParams.getAll('devices').map(Number);
+
+  const currentDevice: string = devicesIds.length === 1 ? (DevicesStore.getDeviceInfoById(devicesIds[0])?.deviceString ?? '') : 'экранов';
 
   const showDrawer = () => {
     setOpen(true);
@@ -83,7 +86,7 @@ const DetailsPage = observer(() => {
 
   return (
     <div className={cls.wrapper}>
-      <Typography.Title level={4}>Выберите или создайте конфигурацию для загрузки на устройства</Typography.Title>
+      <Typography.Title level={4}>Выберите или создайте конфигурацию для {currentDevice}</Typography.Title>
       <Flex gap={15}>
         <Button type="primary" onClick={showDrawer}>
           Добавить виджет

@@ -31,6 +31,10 @@ class DevicesStore {
     return this._activeDeviceId
   }
 
+  getDeviceInfoById(id: number): DeviceStringItem | undefined {
+    return this.getDevicesStringList().find((item) => item.deviceId === id)
+  }
+
   getDevicesStringList(filterString?: string): DeviceStringItem[] {
     const list: DeviceStringItem[] = [];
     for (const building of this._buildings) {
