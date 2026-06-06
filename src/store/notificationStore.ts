@@ -19,6 +19,7 @@ export interface NotificationServiceI {
 class NotificationStore implements NotificationServiceI {
   private _messagesQueue: MessageI[] = [];
   private readonly _timeout = 3000;
+  isLoading = false;
 
   constructor() {
     makeAutoObservable(this);

@@ -77,6 +77,32 @@ class WidgetsStore {
     this._widgetsTypes.push({type, widgetId: uuid});
     this._widgetsLayout.push({i: uuid, ...position});
   }
+
+  getSavedConfigurations(): { types: WidgetType[], layout: LayoutItem[], name: string }[] {
+    return Object.values(localStorage).map((value) => {
+      try {
+        return JSON.parse(value);
+      } catch {
+        return value;
+      }
+    }).filter((item) => {
+      if (typeof item === 'object') {
+        if (item.hasOwnProperty('layout')) {
+          return true;
+        }
+      }
+      return false;
+    });
+  }
+
+  saveConfiguration(configName: string): void {
+    const uuid = window.crypto.randomUUID();
+    localStorage.setItem(uuid, JSON.stringify({
+      types: this._widgetsTypes,
+      layout: this._widgetsLayout,
+      name: configName
+    }));
+  }
 }
 
 export default new WidgetsStore();

@@ -3,9 +3,10 @@ import {Button, Drawer, Flex, Typography} from 'antd';
 import {observer} from "mobx-react";
 import {useState} from "react";
 import WidgetsStore, {WidgetTypes, widgetTypes} from "../../../store/widgetsStore.ts";
-import cls from "../MainPage/mainPage.module.css";
+import cls from './DetailsPage.module.css';
 import GridLayoutContainer from "../GridLayoutContainer/GridLayoutContainer.tsx";
-import {PlusOutlined} from "@ant-design/icons";
+import {PlusOutlined, SaveOutlined} from "@ant-design/icons";
+
 
 
 const DetailsPage = observer(() => {
@@ -28,11 +29,21 @@ const DetailsPage = observer(() => {
     })
   }
 
+  const saveConfiguration = () => {
+    WidgetsStore.saveConfiguration('Teст');
+    console.log(WidgetsStore.getSavedConfigurations())
+  }
+
   return (
       <div className={cls.wrapper}>
+        <Flex gap={15}>
           <Button type="primary" onClick={showDrawer}>
-              Добавить виджет
+            Добавить виджет
           </Button>
+          <Button icon={<SaveOutlined />} onClick={saveConfiguration}>
+            Сохранить конфигурацию
+          </Button>
+        </Flex>
           <Drawer
               title="Добавить новый виджет"
               closable={{'aria-label': 'Close Button'}}

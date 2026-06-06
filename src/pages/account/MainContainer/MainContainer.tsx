@@ -1,9 +1,9 @@
 import {Button, Flex, Segmented, Space, Switch, Typography} from 'antd';
 import {
-  ControlOutlined,
+  ControlOutlined, EditOutlined,
   HomeOutlined,
   LoadingOutlined,
-  MoonOutlined,
+  MoonOutlined, SaveOutlined,
   SunOutlined,
   UserOutlined,
 } from '@ant-design/icons';
@@ -14,6 +14,7 @@ import {useEffect, useState} from 'react';
 import {observer} from 'mobx-react';
 import ConfigStore from '../../../store/configStore.ts';
 import type {SegmentedLabeledOption} from "antd/es/segmented";
+import NotificationStore from "../../../store/notificationStore.ts";
 
 const segmentedConfig: SegmentedLabeledOption<string>[] = [
   {
@@ -25,6 +26,26 @@ const segmentedConfig: SegmentedLabeledOption<string>[] = [
     ),
     value: '',
     disabled: false,
+  },
+  {
+    label: (
+      <Space>
+        <SaveOutlined />
+        Сохраненные конфигурации
+      </Space>
+    ),
+    value: 'configurations',
+    disabled: false,
+  },
+  {
+    label: (
+      <Space>
+        <EditOutlined />
+        Редактировать конфигурацию
+      </Space>
+    ),
+    value: 'create-config',
+    disabled: true,
   },
   {
     label: (
@@ -52,9 +73,9 @@ function MainContainer() {
   }, [location]);
 
   useEffect(() => {
-    const isLoading = false;
+    const isLoading = NotificationStore.isLoading;
     setIsLoadingGlobal(isLoading);
-  }, []);
+  }, [NotificationStore.isLoading]);
 
   return (
     <>

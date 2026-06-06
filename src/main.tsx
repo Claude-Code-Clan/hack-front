@@ -14,6 +14,8 @@ import ConfigStore from './store/configStore.ts';
 import {useEffect} from 'react';
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
+import SavedConfigurationsPage from "./pages/account/SavedConfigurations/SavedConfigurationsPage.tsx";
+import CreateConfigPage from "./pages/account/CreateConfigPage/CreateConfigPage.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +34,14 @@ export const router = createBrowserRouter([
             path: 'details',
             element: <DetailsPage/>,
           },
+          {
+            path: 'configurations',
+            element: <SavedConfigurationsPage/>,
+          },
+          {
+            path: 'create-config',
+            element: <CreateConfigPage/>
+          }
         ],
       },
       {

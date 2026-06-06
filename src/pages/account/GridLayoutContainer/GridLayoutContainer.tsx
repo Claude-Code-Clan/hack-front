@@ -8,6 +8,7 @@ import HUWidgetContainer from "../../../components/HUWidgetContainer/HUWidgetCon
 import {observer} from "mobx-react";
 import WidgetsStore from "../../../store/widgetsStore.ts";
 import HUWidgetsSelector from "../../../components/WidgetsSelector/HUWidgetsSelector.tsx";
+import cls from './GridLayoutContainer.module.css';
 
 
 const dragConfig = {
@@ -44,7 +45,7 @@ const GridLayoutContainer = observer(({}: GridLayoutPropsI) => {
   };
 
   return (
-    <div ref={containerRef} style={{width: '100%', height: '550px'}}>
+    <div className={cls.dotted} ref={containerRef} style={{width: '100%', height: '550px'}}>
       <GridLayout
         style={{height: '100%'}}
         width={width}

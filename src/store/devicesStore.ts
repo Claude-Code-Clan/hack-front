@@ -5,6 +5,7 @@ import BuildingService, {
   type GetEntrancesResponseI
 } from "../api/buildingService.ts";
 import ErrorHandler, {ErrorI} from "../utils/errorHandler.ts";
+import NotificationStore from "./notificationStore.ts";
 
 export interface DeviceStringItem {
   deviceString: string;
@@ -65,10 +66,13 @@ class DevicesStore {
 
   async fetchDevices() {
     try {
+      NotificationStore.isLoading = true;
       const devices = await BuildingService.getBuildings();
       console.log('devices.data', devices.data.buildings)
       this._buildings = devices.data.buildings;
+      NotificationStore.isLoading = false;
     } catch (e: unknown) {
+      NotificationStore.isLoading = false;
       const errorsConfig: ErrorI[] = [{errorText: 'Неверный логин или пароль', code: 401}];
       this._errorHandler.handleError(e, errorsConfig);
     }
