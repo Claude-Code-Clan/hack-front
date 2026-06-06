@@ -46,13 +46,13 @@ const DetailsPage = observer(() => {
   const onSaveConfiguration = () => {
     WidgetsStore.saveConfiguration(confName);
     onCloseSaveDriver();
-    navigate('/account/configurations');
+    navigate('/account');
   }
 
   const onSaveExistedConfiguration = (index: number) => {
     WidgetsStore.replaceConfigSaveByIndex(index);
     onCloseSaveDriver();
-    navigate('/account/configurations');
+    navigate('/account');
   }
 
   const loadSavedConfiguration = (index: number) => {
@@ -66,6 +66,7 @@ const DetailsPage = observer(() => {
 
   return (
     <div className={cls.wrapper}>
+      <Typography.Title level={4}>Выберите или создайте конфигурацию для загрузки на устройства</Typography.Title>
       <Flex gap={15}>
         <Button type="primary" onClick={showDrawer}>
           Добавить виджет
@@ -143,7 +144,9 @@ const DetailsPage = observer(() => {
                     <Typography.Title level={5}>{conf.name}</Typography.Title>
                   </Flex>
                   <Button
-                    onClick={() => {loadSavedConfiguration(index)}}
+                    onClick={() => {
+                      loadSavedConfiguration(index)
+                    }}
                     type='text'
                     icon={<RightOutlined/>}
                   />

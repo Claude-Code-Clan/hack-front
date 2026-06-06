@@ -2,7 +2,7 @@ import {observer} from "mobx-react";
 import {useEffect, useState} from "react";
 import WidgetsStore, {widgetTypes, WidgetTypes} from "../../../store/widgetsStore.ts";
 import cls from "../DetailsPage/DetailsPage.module.css";
-import {Button, Divider, Drawer, Flex, Input, Typography} from "antd";
+import {Button, Divider, Drawer, Flex, Input, Modal, Typography} from "antd";
 import {DeleteOutlined, PlusOutlined, RightOutlined, SaveOutlined} from "@ant-design/icons";
 import GridLayoutContainer from "../GridLayoutContainer/GridLayoutContainer.tsx";
 import {useNavigate, useSearchParams} from "react-router";
@@ -11,6 +11,7 @@ const CreateConfigPage = observer(() => {
   const [open, setOpen] = useState(false);
   const [openSaveDraver, setOpenSaveDraver] = useState(false);
   const [confName, setConfName] = useState('');
+  const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
   const [searchParams] = useSearchParams();
   const configIndex = searchParams.get('confId');
   const savedConfigs = WidgetsStore.getSavedConfigurations();
@@ -76,7 +77,7 @@ const CreateConfigPage = observer(() => {
           Сохранить конфигурацию
         </Button>
         {configIndex &&
-            <Button color='danger' icon={<DeleteOutlined/>} onClick={onDelete}>
+            <Button danger icon={<DeleteOutlined/>} onClick={() => setIsDeleteConfirmOpen(true)}>
                 Удалить конфиг
             </Button>
         }
@@ -128,6 +129,19 @@ const CreateConfigPage = observer(() => {
           })}
         </Flex>
       </Drawer>
+
+      <Modal
+        centered
+        title='Удалить конфигурацию?'
+        open={isDeleteConfirmOpen}
+        onOk={() => onDelete()}
+        onCancel={() => setIsDeleteConfirmOpen(false)}
+        okText='Да'
+        cancelText='Отмена'
+      >
+        <p>Вы действительно хотите удалить?</p>
+      </Modal>
+
       <GridLayoutContainer/>
     </div>
   )
