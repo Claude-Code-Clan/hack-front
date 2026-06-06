@@ -66,4 +66,10 @@ const App = observer(() => {
   },
 );
 
+// `react-grid-layout` tries to read from `process.env` for debugging, but vite
+// doesn't set up process.env, so set it up ourselves.
+(window as unknown as { process: { env: Record<string, string | undefined> } }).process = {
+  env: {},
+};
+
 ReactDOM.createRoot(document.getElementById('root')!).render(<App/>);
