@@ -66,6 +66,33 @@ class WidgetsStore {
     this._widgetsTypes = widgetsTypes;
   }
 
+  async loadWidgetByDisplayId(displayId: number): Promise<void> {
+    try {
+      NotificationStore.isLoading = true;
+      const widgets = await BuildingService.getDisplayConfigurationById([displayId]);
+      this._widgetsLayout = widgets.data.devices[0].widgets.map((widget) => {
+        const uuid = crypto.randomUUID();
+        this._widgetsTypes.push({
+          type: widget.widgetType,
+          widgetId: uuid
+        })
+
+        return{
+          i: uuid,
+          x: widget.x,
+          y: widget.y,
+          w: widget.w,
+          h: widget.h,
+        }
+      });
+      NotificationStore.isLoading = false;
+    } catch (e: unknown) {
+      const errorsConfig: ErrorI[] = [{errorText: 'Не удалось загрузить конфигурацию'}];
+      this._errorHandler.handleError(e, errorsConfig);
+      NotificationStore.isLoading = false;
+    }
+  }
+
   async loadSavedConfigurationToDisplays(data: LoadConfigurationToDisplaysRequestI['displayIds']): Promise<void> {
     try {
       NotificationStore.isLoading = true;

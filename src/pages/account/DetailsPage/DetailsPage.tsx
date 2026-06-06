@@ -10,6 +10,7 @@ import {useNavigate, useSearchParams} from "react-router";
 
 
 const DetailsPage = observer(() => {
+  const [widgetsFetched, setWidgetsFetched] = useState(false);
   const [open, setOpen] = useState(false);
   const [openSaveDraver, setOpenSaveDraver] = useState(false);
   const [openLoadSavedDraver, setOpenLoadSavedDraver] = useState(false);
@@ -74,7 +75,10 @@ const DetailsPage = observer(() => {
   }
 
   useEffect(() => {
-    console.log('devicesIds', devicesIds);
+  if (devicesIds.length !== 1 || widgetsFetched) return;
+    void WidgetsStore.loadWidgetByDisplayId(devicesIds[0]).finally(() => {
+      setWidgetsFetched(true)
+    });
   }, [devicesIds]);
 
   return (

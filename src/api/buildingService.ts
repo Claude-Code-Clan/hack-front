@@ -32,13 +32,30 @@ export interface LoadConfigurationToDisplaysRequestI {
   }[];
 }
 
+export interface GetDisplayConfigurationByIdRequestI {
+  devices: {
+    deviceId: number;
+    widgets: {
+      id: number,
+      widgetType: WidgetTypes,
+      x: number;
+      y: number;
+      w: number;
+      h: number;
+    }[]
+  }[]
+}
+
 export default class BuildingService {
-  static async getBuildings(): Promise<AxiosResponse<{buildings: GetBuildingsResponseI[]}>> {
+  static async getBuildings(): Promise<AxiosResponse<{ buildings: GetBuildingsResponseI[] }>> {
     return $api.get('http://87.251.77.84:8080/api/v1/Get/building-list');
   }
 
-
   static async loadConfigurationToDisplays(payload: LoadConfigurationToDisplaysRequestI): Promise<AxiosResponse> {
     return $api.post('http://87.251.77.84:8080/api/v1/Post/display-set', payload);
+  }
+
+  static async getDisplayConfigurationById(deviceIds: number[]): Promise<AxiosResponse<GetDisplayConfigurationByIdRequestI>> {
+    return $api.post('http://87.251.77.84:8080/api/v1/Get/get-widgets', {deviceIds});
   }
 }
