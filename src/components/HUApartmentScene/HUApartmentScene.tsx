@@ -63,6 +63,51 @@ const DEVICES_COORDINATES: DevicesCoordinates[] = [
   },
 ];
 
+function Floor() {
+  return (
+    <>
+      {/* Плоскость пола */}
+      <Plane args={[4, 4]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+        <meshStandardMaterial color="lightgray"/>
+      </Plane>
+
+      {/* Стены внешние */}
+      <Box receiveShadow castShadow position={[0, 0.5, -1.95]} args={[4, 1, 0.1]}>
+        <meshStandardMaterial color="white"/>
+      </Box>
+      <Box receiveShadow castShadow position={[0, 0.5, 1.95]} args={[4, 1, 0.1]}>
+        <meshStandardMaterial color="white"/>
+      </Box>
+      <Box receiveShadow castShadow position={[-2.05, 0.5, 0]} args={[0.1, 1, 4]}>
+        <meshStandardMaterial color="white"/>
+      </Box>
+
+      {/* Стены как коробки */}
+      {/*<Box receiveShadow castShadow position={[2.05, 0.5, 0]} args={[0.1, 1, 4]}>*/}
+      {/*  <meshStandardMaterial color="white"/>*/}
+      {/*</Box>*/}
+      {/*<Box receiveShadow castShadow position={[0.1, 0.5, 0.6]} args={[1.7, 1, 0.1]}>*/}
+      {/*  <meshStandardMaterial color="white"/>*/}
+      {/*</Box>*/}
+      {/*<Box receiveShadow castShadow position={[1.8, 0.5, 0.6]} args={[0.5, 1, 0.1]}>*/}
+      {/*  <meshStandardMaterial color="white"/>*/}
+      {/*</Box>*/}
+      {/*<Box receiveShadow castShadow position={[-0.7, 0.5, 1]} args={[0.1, 1, 2]}>*/}
+      {/*  <meshStandardMaterial color="white"/>*/}
+      {/*</Box>*/}
+      {/*<Box receiveShadow castShadow position={[-0.7, 0.5, -1.2]} args={[0.1, 1, 1.4]}>*/}
+      {/*  <meshStandardMaterial color="white"/>*/}
+      {/*</Box>*/}
+      {/*<Box receiveShadow castShadow position={[-1.8, 0.5, -1]} args={[0.4, 1, 0.1]}>*/}
+      {/*  <meshStandardMaterial color="white"/>*/}
+      {/*</Box>*/}
+      {/*<Box receiveShadow castShadow position={[-0.9, 0.5, -1]} args={[0.4, 1, 0.1]}>*/}
+      {/*  <meshStandardMaterial color="white"/>*/}
+      {/*</Box>*/}
+    </>
+  )
+}
+
 function ApartmentScene({devicesCount, selectedDeviceIndex}: HUApartmentScenePropsI) {
   const {camera} = useThree()
 
@@ -159,7 +204,7 @@ export default function HUApartmentScene(props: HUApartmentScenePropsI) {
       }}
       shadows
     >
-      <ApartmentScene {...props}/>
+      <Floor/>
 
       <OrbitControls
         enableRotate
