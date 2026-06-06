@@ -2,6 +2,9 @@ import cn from "classnames";
 import cls from "../WidgetsSelector/HUWidgetsSelector.module.css";
 import type {WidgetTypes} from "../../store/widgetsStore.ts";
 import NewsWidget from "../../widgets/NewsWidget/NewsWidget.tsx";
+import StaticInfoWidget from "../../widgets/StaticInfoWidget/StaticInfoWindget.tsx";
+import ParkingWidget from "../../widgets/ParkingWidget/ParkingWidget.tsx";
+import StorageWidget from "../../widgets/StorageWidget/StorageWidget.tsx";
 
 interface HUWidgetSelectorProps {
     type?: WidgetTypes;
@@ -11,36 +14,19 @@ interface HUWidgetSelectorProps {
 export default function HUWidgetsSelector({type, children}: HUWidgetSelectorProps){
     switch (type) {
         case 'staticinfo':
-            return (
-                <div className={cn(cls.wrapper, 'handle')}>
-                    <div className={cls.header}>
-                        <div>Информация</div>
-                    </div>
-                    {children}
-                </div>
-            )
+            return <StaticInfoWidget/>
 
         case 'news':
             return <NewsWidget/>
 
         case 'parking':
             return (
-                <div className={cn(cls.wrapper, 'handle')}>
-                    <div className={cls.header}>
-                        <div>Свободных парковочных мест</div>
-                    </div>
-                    {children}
-                </div>
+                <ParkingWidget/>
             )
 
         case 'storage':
             return (
-                <div className={cn(cls.wrapper, 'handle')}>
-                    <div className={cls.header}>
-                        <div>Свободных кладовых</div>
-                    </div>
-                    {children}
-                </div>
+                <StorageWidget/>
             )
 
         case 'weather':

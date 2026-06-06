@@ -6,7 +6,20 @@ interface WidgetType {
   widgetId: string;
 }
 
-export type WidgetTypes = 'staticinfo' | 'news' | 'parking' | 'storage' | 'weather' | 'camera' | 'other' | 'ads'
+//export type WidgetTypes = 'staticinfo' | 'news' | 'parking' | 'storage' | 'weather' | 'camera' | 'other' | 'ads'
+
+export const widgetTypes = [
+  'staticinfo',
+  'news',
+  'parking',
+  'storage',
+  'weather',
+  'camera',
+  'other',
+  'ads'
+] as const;
+
+export type WidgetTypes = typeof widgetTypes[number];
 
 export const layouts = [
   {
@@ -21,7 +34,7 @@ export const layouts = [
 ];
 
 const types: WidgetType[] = [{
-  type: 'news',
+  type: 'storage',
   widgetId: 'widget-1',
 }];
 
