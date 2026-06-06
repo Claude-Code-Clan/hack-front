@@ -37,9 +37,13 @@ const DetailsPage = observer(() => {
   }
 
   const addWidget = (type: WidgetTypes) => {
+    let maxY = 0;
+    WidgetsStore.widgetsLayout.forEach((widget) => {
+      if (widget.y + widget.w > maxY) maxY = widget.y + widget.w;
+    })
     WidgetsStore.addWidget(type, {
       x: 0,
-      y: 0,
+      y: maxY,
       w: 1,
       h: 1,
     })

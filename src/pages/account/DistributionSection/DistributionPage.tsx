@@ -1,4 +1,4 @@
-import {Button, Divider, Drawer, Flex, Input, Tree, TreeDataNode, type TreeProps, Typography} from "antd";
+import {Button, Drawer, Flex, Input, Tree, TreeDataNode, type TreeProps} from "antd";
 import DevicesStore from "../../../store/devicesStore.ts";
 import {useMemo, useState} from "react";
 import {observer} from "mobx-react";
@@ -62,7 +62,7 @@ const DistributionPage = observer(() => {
         <Button
           onClick={navigateToConfigureScreens}
           disabled={selectedDevices.length === 0}
-          icon={<RightOutlined />}
+          icon={<RightOutlined/>}
         >
           Сконфигурировать экран
         </Button>
@@ -70,7 +70,7 @@ const DistributionPage = observer(() => {
         <Button
           danger
           disabled={selectedDevices.length === 0}
-          icon={<ExclamationCircleOutlined />}
+          icon={<ExclamationCircleOutlined/>}
           onClick={() => setDangerDrawerOpen(true)}
         >
           Активировать режим ЧС
@@ -78,7 +78,7 @@ const DistributionPage = observer(() => {
         <Button
           variant='outlined'
           disabled={selectedDevices.length === 0}
-          icon={<CheckCircleOutlined />}
+          icon={<CheckCircleOutlined/>}
           color="cyan"
         >
           Отозвать режим ЧС
