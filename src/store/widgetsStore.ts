@@ -62,6 +62,11 @@ class WidgetsStore {
     this._widgetsTypes = widgetsTypes;
   }
 
+  clearConfiguration() {
+    this._widgetsLayout = [];
+    this._widgetsTypes = [];
+  }
+
   getWidgetType(widgetId: string): WidgetTypes | undefined {
     return this.widgetsTypes.find((widgetType) => widgetType.widgetId === widgetId)?.type;
   }
@@ -78,10 +83,26 @@ class WidgetsStore {
     this._widgetsLayout.push({i: uuid, ...position});
   }
 
-  getSavedConfigurations(): { types: WidgetType[], layout: LayoutItem[], name: string }[] {
-    return Object.values(localStorage).map((value) => {
+  loadSavedConfigByIndex(index: number): void {
+    const savedConf = this.getSavedConfigurations()?.[index];
+    this._widgetsLayout = savedConf?.layout ?? [];
+    this._widgetsTypes = savedConf?.types ?? [];
+  }
+
+  replaceConfigSaveByIndex(index: number) {
+    const savedConf = this.getSavedConfigurations()?.[index];
+    this.replaceConfigSaveByUuid(savedConf.uuid);
+  }
+
+  replaceConfigSaveByUuid(uuid: string): void {
+    const currentSave = this.getSavedConfigurations().find((item) => item.uuid === uuid);
+    localStorage.setItem(uuid, JSON.stringify({name: currentSave?.name, types: this._widgetsTypes, layout: this._widgetsLayout}));
+  }
+
+  getSavedConfigurations(): { uuid: string, types: WidgetType[], layout: LayoutItem[], name: string }[] {
+    return Object.entries(localStorage).map(([uuid, value]) => {
       try {
-        return JSON.parse(value);
+        return {uuid, ...JSON.parse(value)};
       } catch {
         return value;
       }

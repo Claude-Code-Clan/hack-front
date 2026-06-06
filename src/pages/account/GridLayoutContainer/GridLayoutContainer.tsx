@@ -1,4 +1,4 @@
-import {useMemo} from "react";
+import {useEffect, useMemo} from "react";
 
 import {GridLayout, type LayoutItem, useContainerWidth, useResponsiveLayout} from "react-grid-layout";
 
@@ -40,9 +40,14 @@ const GridLayoutContainer = observer(({}: GridLayoutPropsI) => {
   }, [cols]);
 
   const onLayoutChange = (e: LayoutItem[]) => {
-    console.log(e)
+    console.log(JSON.stringify(e))
+    console.log(JSON.stringify(WidgetsStore.widgetsLayout))
     WidgetsStore.widgetsLayout = e;
   };
+
+  useEffect(() => {
+    WidgetsStore.clearConfiguration();
+  }, []);
 
   return (
     <div className={cls.dotted} ref={containerRef} style={{width: '100%', height: '550px'}}>
@@ -50,7 +55,9 @@ const GridLayoutContainer = observer(({}: GridLayoutPropsI) => {
         style={{height: '100%'}}
         width={width}
         layout={layout}
-        onLayoutChange={le => onLayoutChange(le as LayoutItem[])}
+        onDrop={le => onLayoutChange(le as LayoutItem[])}
+        onDragStop={le => onLayoutChange(le as LayoutItem[])}
+        onResizeStop={le => onLayoutChange(le as LayoutItem[])}
         dragConfig={dragConfig}
         gridConfig={gridConfig}
       >
