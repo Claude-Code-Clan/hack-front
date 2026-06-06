@@ -16,7 +16,7 @@ const DistributionPage = observer(() => {
       tree.push({
         title: building.buildingAddress,
         key: `building_${building.id}`,
-        children: building.Entrances.map(entrance => {
+        children: building.entrances.map(entrance => {
           return ({
             title: `Номер подъезда ${entrance.entranceNumber}`,
             key: `entrance_${entrance.id}`,

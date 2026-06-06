@@ -1,3 +1,6 @@
+import $api from "./index.ts";
+import type {AxiosResponse} from "axios";
+
 export interface GetDevicesResponseI {
   id: number;
   deviceType: string; // ТИП (Холл, Лифтовая кабина, ресепшен)
@@ -12,17 +15,17 @@ export interface GetEntrancesResponseI {
 
 export interface GetBuildingsResponseI {
   id: number; // ID дома
-  buildingNumber: number; // Номер дома
+  buildingTitle: number; // Номер дома
   buildingAddress: string; // Адрес
-  Entrances: GetEntrancesResponseI[]; // Список подъездов
+  entrances: GetEntrancesResponseI[]; // Список подъездов
 }
 
 export const mockBuildings: GetBuildingsResponseI[] = [
   {
     id: 1,
-    buildingNumber: 101,
+    buildingTitle: 101,
     buildingAddress: "ул. Ленина, 10",
-    Entrances: [
+    entrances: [
       {
         id: 11,
         entranceNumber: 1,
@@ -46,9 +49,9 @@ export const mockBuildings: GetBuildingsResponseI[] = [
   },
   {
     id: 2,
-    buildingNumber: 202,
+    buildingTitle: 202,
     buildingAddress: "пр. Победы, 25",
-    Entrances: [
+    entrances: [
       {
         id: 21,
         entranceNumber: 1,
@@ -80,9 +83,9 @@ export const mockBuildings: GetBuildingsResponseI[] = [
   },
   {
     id: 3,
-    buildingNumber: 303,
+    buildingTitle: 303,
     buildingAddress: "ул. Советская, 7",
-    Entrances: [
+    entrances: [
       {
         id: 31,
         entranceNumber: 1,
@@ -108,7 +111,7 @@ export const mockBuildings: GetBuildingsResponseI[] = [
 export default class BuildingService {
   // private static readonly loginBaseUrl = '/buildings';
 
-  static async getBuildings(): Promise<GetBuildingsResponseI[]> {
-    return Promise.resolve(mockBuildings);
+  static async getBuildings(): Promise<AxiosResponse<{buildings: GetBuildingsResponseI[]}>> {
+    return $api.get('http://87.251.77.84:8080/api/v1/Get/building-list');
   }
 }

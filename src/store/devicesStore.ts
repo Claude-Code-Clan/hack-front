@@ -33,13 +33,13 @@ class DevicesStore {
   getDevicesStringList(filterString?: string): DeviceStringItem[] {
     const list: DeviceStringItem[] = [];
     for (const building of this._buildings) {
-      for (const entrance of building.Entrances) {
+      for (const entrance of building.entrances) {
         for (const device of entrance.devices) {
           list.push({
-            deviceString: `${building.buildingAddress} ${building.buildingNumber}, подъезд ${entrance.entranceNumber}, ${device.deviceType}`,
+            deviceString: `${building.buildingAddress} ${building.buildingTitle}, подъезд ${entrance.entranceNumber}, ${device.deviceType}`,
             deviceId: device.id,
             buildingAddress: building.buildingAddress,
-            buildingNumber: building.buildingNumber,
+            buildingNumber: building.buildingTitle,
             entranceNumber: entrance.entranceNumber,
             deviceType: device.deviceType,
             buildingId: building.id,
@@ -56,7 +56,7 @@ class DevicesStore {
   }
 
   getEntrances(buildingId: number): GetEntrancesResponseI[] | undefined {
-    return this._buildings.find((b) => b.id === buildingId)?.Entrances
+    return this._buildings.find((b) => b.id === buildingId)?.entrances
   }
 
   get buildings(): GetBuildingsResponseI[] {
@@ -66,7 +66,8 @@ class DevicesStore {
   async fetchDevices() {
     try {
       const devices = await BuildingService.getBuildings();
-      this._buildings = devices;
+      console.log('devices.data', devices.data.buildings)
+      this._buildings = devices.data.buildings;
     } catch (e: unknown) {
       const errorsConfig: ErrorI[] = [{errorText: 'Неверный логин или пароль', code: 401}];
       this._errorHandler.handleError(e, errorsConfig);
