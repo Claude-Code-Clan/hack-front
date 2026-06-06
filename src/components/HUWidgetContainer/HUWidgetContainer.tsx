@@ -26,9 +26,9 @@ export default function HUWidgetContainer({children, onDelete}: PropsWithChildre
           />)
         }
       </div>
-      <p>
+      <div>
         {children}
-      </p>
+      </div>
     </Card>
   );
 }

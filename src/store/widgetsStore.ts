@@ -49,7 +49,7 @@ class WidgetsStore {
     this._widgetsTypes = widgetsTypes;
   }
 
-  getWidgetType(widgetId: string): string | undefined {
+  getWidgetType(widgetId: string): WidgetTypes | undefined {
     return this.widgetsTypes.find((widgetType) => widgetType.widgetId === widgetId)?.type;
   }
 
