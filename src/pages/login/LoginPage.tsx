@@ -18,7 +18,7 @@ export default function LoginPage() {
   return (
     <Flex vertical align="center" justify="center" flex="1">
       <Space direction="vertical" size="large">
-        <Typography.Title style={{ textAlign: 'center' }}>Ujin<br/> Личный кабинет</Typography.Title>
+        <Typography.Title style={{ textAlign: 'center' }}>Личный кабинет</Typography.Title>
 
         <Space direction="vertical" style={{width: '100%'}}>
           <Input variant="filled" placeholder="Email" />
