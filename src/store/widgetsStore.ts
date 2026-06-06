@@ -21,7 +21,7 @@ export const layouts = [
 ];
 
 const types: WidgetType[] = [{
-  type: 'staticinfo',
+  type: 'news',
   widgetId: 'widget-1',
 }];
 

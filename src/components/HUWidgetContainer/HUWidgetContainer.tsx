@@ -11,23 +11,21 @@ interface HUWidgetContainerPropsI {
 export default function HUWidgetContainer({children, onDelete}: PropsWithChildren<HUWidgetContainerPropsI>) {
   return (
     <Card
-      title={
-        <div className={cn(cls.dragHolder, 'drag-handle')}>
-          <Button
-            type='text'
-            icon={<HolderOutlined/>}
-          />
-          {onDelete &&
-            (<Button
-              onClick={onDelete}
-              type='text'
-              icon={<DeleteOutlined/>}
-            />)
-          }
-        </div>
-      }
       className={cls.wrapper}
     >
+      <div className={cn(cls.dragHolder, 'drag-handle')}>
+        <Button
+          type='text'
+          icon={<HolderOutlined/>}
+        />
+        {onDelete &&
+          (<Button
+            onClick={onDelete}
+            type='text'
+            icon={<DeleteOutlined/>}
+          />)
+        }
+      </div>
       <p>
         {children}
       </p>

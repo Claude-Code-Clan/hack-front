@@ -1,6 +1,7 @@
 import cn from "classnames";
 import cls from "../WidgetsSelector/HUWidgetsSelector.module.css";
 import type {WidgetTypes} from "../../store/widgetsStore.ts";
+import NewsWidget from "../../widgets/NewsWidget/NewsWidget.tsx";
 
 interface HUWidgetSelectorProps {
     type?: WidgetTypes;
@@ -20,14 +21,7 @@ export default function HUWidgetsSelector({type, children}: HUWidgetSelectorProp
             )
 
         case 'news':
-            return (
-                <div className={cn(cls.wrapper, 'handle')}>
-                    <div className={cls.header}>
-                        <div>Новости</div>
-                    </div>
-                    {children}
-                </div>
-            )
+            return <NewsWidget/>
 
         case 'parking':
             return (
