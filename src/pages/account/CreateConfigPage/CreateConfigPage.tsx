@@ -3,13 +3,15 @@ import {useEffect, useState} from "react";
 import WidgetsStore, {widgetTypes, WidgetTypes} from "../../../store/widgetsStore.ts";
 import cls from "../DetailsPage/DetailsPage.module.css";
 import {Button, Divider, Drawer, Flex, Input, Modal, Typography} from "antd";
-import {DeleteOutlined, PlusOutlined, RightOutlined, SaveOutlined} from "@ant-design/icons";
+import {DeleteOutlined, FullscreenOutlined, PlusOutlined, RightOutlined, SaveOutlined} from "@ant-design/icons";
 import GridLayoutContainer from "../GridLayoutContainer/GridLayoutContainer.tsx";
 import {useNavigate, useSearchParams} from "react-router";
+import PreviewSection from "../PreviewSection/PreviewSection.tsx";
 
 const CreateConfigPage = observer(() => {
   const [open, setOpen] = useState(false);
   const [openSaveDraver, setOpenSaveDraver] = useState(false);
+  const [openPreview, setOpenPreview] = useState(false);
   const [confName, setConfName] = useState('');
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
   const [searchParams] = useSearchParams();
@@ -79,6 +81,7 @@ const CreateConfigPage = observer(() => {
 
   return (
     <div className={cls.wrapper}>
+      <PreviewSection onClose={() => setOpenPreview(false)} open={openPreview} widgetLayout={WidgetsStore.widgetsLayout} widgetTypes={WidgetsStore.widgetsTypes}/>
       <Flex gap={15}>
         <Button type="primary" onClick={showDrawer}>
           Добавить виджет
@@ -91,6 +94,14 @@ const CreateConfigPage = observer(() => {
                 Удалить конфиг
             </Button>
         }
+        <Button
+          color='purple'
+          variant='outlined'
+          icon={<FullscreenOutlined />}
+          onClick={() => setOpenPreview(true)}
+        >
+          Превью
+        </Button>
       </Flex>
       <Drawer
         title="Добавить новый виджет"

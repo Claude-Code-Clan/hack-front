@@ -18,7 +18,7 @@ function RssItem({ title, availableRss }: RssI) {
     );
 }
 
-export default function RssWidget() {
+export default function RssWidget({style}: {style?: React.CSSProperties;}) {
     const [rss, setRss] = useState<RssI[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
 
@@ -62,7 +62,7 @@ export default function RssWidget() {
     }
 
     return (
-        <div className={cls.wrapper}>
+        <div className={cls.wrapper} style={style}>
             <Carousel autoplay={{ dotDuration: true }} autoplaySpeed={5000}>
                 {rss.map((rssItem, index) => (
                     <RssItem key={index} {...rssItem} />

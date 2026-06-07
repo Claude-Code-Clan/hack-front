@@ -13,34 +13,35 @@ import RssWidget from "../../widgets/RssWidget/RssWidget.tsx";
 interface HUWidgetSelectorProps {
   type?: WidgetTypes;
   children?: React.ReactNode;
+  style?: React.CSSProperties;
 }
 
-export default function HUWidgetsSelector({type}: HUWidgetSelectorProps) {
+export default function HUWidgetsSelector({type, style}: HUWidgetSelectorProps) {
   switch (type) {
     case 'staticinfo':
-      return <StaticInfoWidget/>
+      return <StaticInfoWidget style={style}/>
 
     case 'news':
-      return <NewsWidget/>
+      return <NewsWidget style={style}/>
 
     case 'parking':
       return (
-        <ParkingWidget/>
+        <ParkingWidget style={style}/>
       )
 
     case 'storage':
       return (
-        <StorageWidget/>
+        <StorageWidget style={style}/>
       )
 
     case 'weather':
       return (
-        <WeatherWidget/>
+        <WeatherWidget style={style}/>
       )
 
     case 'rss':
       return (
-        <RssWidget/>
+        <RssWidget style={style}/>
       )
 
     case 'camera':

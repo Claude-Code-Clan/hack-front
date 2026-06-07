@@ -20,10 +20,10 @@ function StorageItem({title, availableStorage}: StorageI) {
 }
 
 export interface StorageWidgetPropsI {
-    news: StorageI[];
+    style?: React.CSSProperties;
 }
 
-export default function StorageWidget() {
+export default function StorageWidget({style}: StorageWidgetPropsI) {
     const storage: StorageI[] = [
         {
             title: 'Доступно кладовых',
@@ -32,7 +32,7 @@ export default function StorageWidget() {
     ];
 
     return (
-        <div className={cls.wrapper}>
+        <div className={cls.wrapper} style={style}>
             <Carousel autoplay={{dotDuration: true}} autoplaySpeed={5000}>
                 {storage.map((storageItem) =>
                     (<StorageItem {...storageItem}/>)

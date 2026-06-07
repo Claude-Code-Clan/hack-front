@@ -5,14 +5,23 @@ import {useEffect, useState} from "react";
 import WidgetsStore, {WidgetTypes, widgetTypes} from "../../../store/widgetsStore.ts";
 import cls from './DetailsPage.module.css';
 import GridLayoutContainer from "../GridLayoutContainer/GridLayoutContainer.tsx";
-import {CloudUploadOutlined, DownloadOutlined, PlusOutlined, RightOutlined, SaveOutlined} from "@ant-design/icons";
+import {
+  CloudUploadOutlined,
+  DownloadOutlined,
+  FullscreenOutlined,
+  PlusOutlined,
+  RightOutlined,
+  SaveOutlined
+} from "@ant-design/icons";
 import {useNavigate, useSearchParams} from "react-router";
 import DevicesStore from "../../../store/devicesStore.ts";
+import PreviewSection from "../PreviewSection/PreviewSection.tsx";
 
 
 const DetailsPage = observer(() => {
   const [widgetsFetched, setWidgetsFetched] = useState(false);
   const [open, setOpen] = useState(false);
+  const [openPreview, setOpenPreview] = useState(false);
   const [openSaveDraver, setOpenSaveDraver] = useState(false);
   const [openLoadSavedDraver, setOpenLoadSavedDraver] = useState(false);
   const [confName, setConfName] = useState('');
@@ -100,6 +109,7 @@ const DetailsPage = observer(() => {
 
   return (
     <div className={cls.wrapper}>
+      <PreviewSection onClose={() => setOpenPreview(false)} open={openPreview} widgetLayout={WidgetsStore.widgetsLayout} widgetTypes={WidgetsStore.widgetsTypes}/>
       <Typography.Title level={4}>Выберите или создайте конфигурацию для {currentDevice}</Typography.Title>
       <Flex gap={15}>
         <Button type="primary" onClick={showDrawer}>
@@ -120,6 +130,15 @@ const DetailsPage = observer(() => {
         >
           Загрузить на экраны
         </Button>}
+
+        <Button
+          color='purple'
+          variant='outlined'
+          icon={<FullscreenOutlined />}
+          onClick={() => setOpenPreview(true)}
+        >
+          Превью
+        </Button>
       </Flex>
       <Drawer
         title="Добавить новый виджет"

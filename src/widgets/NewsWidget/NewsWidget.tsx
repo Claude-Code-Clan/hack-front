@@ -21,10 +21,10 @@ function NewsItem({title, body, date}: NewsI) {
 }
 
 export interface NewsWidgetPropsI {
-  news: NewsI[];
+  style?: React.CSSProperties
 }
 
-export default function NewsWidget() {
+export default function NewsWidget({style}: NewsWidgetPropsI) {
   const news: NewsI[] = [
     {
       title: 'Синицы',
@@ -47,7 +47,7 @@ export default function NewsWidget() {
   ];
 
   return (
-    <div className={cls.wrapper}>
+    <div className={cls.wrapper} style={style}>
       <Carousel autoplay={{dotDuration: true}} autoplaySpeed={5000}>
         {news.map((newsItem) =>
           (<NewsItem {...newsItem}/>)

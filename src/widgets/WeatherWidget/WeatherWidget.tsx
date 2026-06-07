@@ -32,7 +32,7 @@ const WeatherItem = observer(({ title }: WeatherItemProps) => {
 });
 
 
-export default function WeatherWidget() {
+export default function WeatherWidget({style}: {style?: React.CSSProperties;}) {
     const weatherSections = [
         {
             title: 'Москва',
@@ -40,7 +40,7 @@ export default function WeatherWidget() {
     ];
 
     return (
-        <div className={cls.wrapper}>
+        <div style={style} className={cls.wrapper}>
             <Carousel autoplay={{ dotDuration: true }} autoplaySpeed={5000}>
                 {weatherSections.map((item, index) => (
                     <WeatherItem key={index} title={item.title} />

@@ -17,10 +17,10 @@ function ParkingItem({title, availableParking}: ParkingI) {
 }
 
 export interface ParkingWidgetPropsI {
-    news: ParkingI[];
+    style?: React.CSSProperties;
 }
 
-export default function ParkingWidget() {
+export default function ParkingWidget({style}: ParkingWidgetPropsI) {
     const parking: ParkingI[] = [
         {
             title: 'Доступно парковочных мест на подземном паркинге',
@@ -33,7 +33,7 @@ export default function ParkingWidget() {
     ];
 
     return (
-        <div className={cls.wrapper}>
+        <div className={cls.wrapper} style={style}>
             <Carousel autoplay={{dotDuration: true}} autoplaySpeed={5000}>
                 {parking.map((parkingItem) =>
                     (<ParkingItem {...parkingItem}/>)

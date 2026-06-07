@@ -21,10 +21,10 @@ function InfoItem({name, rules, trashSchedule, emergencyContacts}: ApartmentsInf
 }
 
 export interface StaticInfoWidgetPropsI {
-    info: ApartmentsInfoI[];
+    style?: React.CSSProperties;
 }
 
-export default function StaticInfoWidget() {
+export default function StaticInfoWidget({style}: StaticInfoWidgetPropsI) {
     const info: ApartmentsInfoI[] = [
         {
             name: 'Morion',
@@ -35,7 +35,7 @@ export default function StaticInfoWidget() {
     ];
 
     return (
-        <div className={cls.wrapper}>
+        <div className={cls.wrapper} {...style}>
             <Carousel autoplay={{dotDuration: true}} autoplaySpeed={3000}>
                 {info.map((infoItem) =>
                     (<InfoItem {...infoItem}/>)

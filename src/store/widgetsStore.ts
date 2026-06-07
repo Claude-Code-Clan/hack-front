@@ -1,10 +1,10 @@
 import {makeAutoObservable} from "mobx";
-import {Layout, LayoutItem} from "react-grid-layout";
+import {LayoutItem} from "react-grid-layout";
 import BuildingService, {type LoadConfigurationToDisplaysRequestI} from "../api/buildingService.ts";
 import NotificationStore from "./notificationStore.ts";
 import ErrorHandler, {ErrorI} from "../utils/errorHandler.ts";
 
-interface WidgetType {
+export interface WidgetType {
   type: WidgetTypes;
   widgetId: string;
 }
@@ -23,33 +23,17 @@ export const widgetTypes = [
 
 export type WidgetTypes = typeof widgetTypes[number];
 
-export const layouts = [
-  {
-    i: "widget-1",
-    x: 0,
-    y: 0,
-    w: 2,
-    h: 1,
-    isDraggable: true,
-    isResizable: true,
-  },
-];
-
-const types: WidgetType[] = [{
-  type: 'weather',
-  widgetId: 'widget-1',
-}];
 
 class WidgetsStore {
-  private _widgetsLayout: LayoutItem[] = layouts;
-  private _widgetsTypes: WidgetType[] = types;
+  private _widgetsLayout: LayoutItem[] = [];
+  private _widgetsTypes: WidgetType[] = [];
   private readonly _errorHandler = new ErrorHandler();
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  get widgetsLayout(): Layout {
+  get widgetsLayout(): LayoutItem[] {
     return this._widgetsLayout;
   }
 
@@ -76,7 +60,7 @@ class WidgetsStore {
           widgetId: uuid
         })
 
-        return{
+        return {
           i: uuid,
           x: widget.x,
           y: widget.y,
@@ -106,7 +90,7 @@ class WidgetsStore {
           h: layout.h,
         }
       })
-      await     BuildingService.loadConfigurationToDisplays({displayIds: data, widgets});
+      await BuildingService.loadConfigurationToDisplays({displayIds: data, widgets});
       NotificationStore.isLoading = false;
     } catch (e: unknown) {
       NotificationStore.isLoading = false;
@@ -155,7 +139,11 @@ class WidgetsStore {
 
   replaceConfigSaveByUuid(uuid: string): void {
     const currentSave = this.getSavedConfigurations().find((item) => item.uuid === uuid);
-    localStorage.setItem(uuid, JSON.stringify({name: currentSave?.name, types: this._widgetsTypes, layout: this._widgetsLayout}));
+    localStorage.setItem(uuid, JSON.stringify({
+      name: currentSave?.name,
+      types: this._widgetsTypes,
+      layout: this._widgetsLayout
+    }));
   }
 
   getSavedConfigurations(): { uuid: string, types: WidgetType[], layout: LayoutItem[], name: string }[] {
