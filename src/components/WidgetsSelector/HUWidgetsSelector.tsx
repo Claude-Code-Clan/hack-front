@@ -51,7 +51,7 @@ export default function HUWidgetsSelector({type}: HUWidgetSelectorProps) {
             playerRef={playerRef}
             src="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
             autoPlay={true}
-            controls={true}
+            controls={false}
             muted={true}
             width="100%"
             height="auto"
