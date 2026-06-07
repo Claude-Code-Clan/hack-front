@@ -1,4 +1,4 @@
-import {useEffect, useMemo} from "react";
+import {useEffect, useMemo, useState} from "react";
 
 import {GridLayout, type LayoutItem, useContainerWidth, useResponsiveLayout} from "react-grid-layout";
 
@@ -9,6 +9,7 @@ import {observer} from "mobx-react";
 import WidgetsStore from "../../../store/widgetsStore.ts";
 import HUWidgetsSelector from "../../../components/WidgetsSelector/HUWidgetsSelector.tsx";
 import cls from './GridLayoutContainer.module.css';
+import NotificationStore from "../../../store/notificationStore.ts";
 
 
 const dragConfig = {
@@ -23,6 +24,7 @@ const GridLayoutContainer = observer(({}: GridLayoutPropsI) => {
   const layouts = {lg: WidgetsStore.widgetsLayout};
   const useContainerWidthResult = useContainerWidth();
   const {width, containerRef} = useContainerWidthResult;
+  const [isLoading, setIsLoading] = useState(false);
 
   const useResponsiveLayoutResult = useResponsiveLayout({
     width,
@@ -49,9 +51,18 @@ const GridLayoutContainer = observer(({}: GridLayoutPropsI) => {
     WidgetsStore.clearConfiguration();
   }, []);
 
+  useEffect(() => {
+    setIsLoading(true);
+    const timeout = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
   return (
     <div className={cls.dotted} ref={containerRef} style={{width: '100%', height: '1900px'}}>
-      <GridLayout
+      {!isLoading && <GridLayout
         style={{height: '100%'}}
         width={width}
         layout={layout}
@@ -68,7 +79,7 @@ const GridLayoutContainer = observer(({}: GridLayoutPropsI) => {
             </HUWidgetContainer>
           </div>
         ))}
-      </GridLayout>
+      </GridLayout>}
     </div>
   );
 })

@@ -48,7 +48,7 @@ function ApartmentScene() {
       <Box receiveShadow castShadow position={[-0.9, 0.5, -1]} args={[0.4, 1, 0.1]}>
         <meshStandardMaterial color={whallColor}/>
       </Box>
-      <Box receiveShadow castShadow rotation={[0, Math.PI, 0]} position={[0.2, 0.7, 0.56]} scale={0.2} args={[3.2, 2, 0.2]}>
+      <Box receiveShadow castShadow rotation={[0, Math.PI, Math.PI/2]} position={[0.2, 0.7, 0.56]} scale={0.2} args={[2.6, 1.8, 0.2]}>
         <meshStandardMaterial color="black"/>
       </Box>
     </mesh>
@@ -63,7 +63,7 @@ interface PreviewItemPropsI {
 const PreviewItem = observer(({widgetLayout, widgetTypes}: PreviewItemPropsI) => {
 
   return (
-    <div style={{height: 564, position: 'relative'}}>
+    <div style={{height: 1700, position: 'relative'}}>
       {widgetTypes?.map(wt => {
         const currentLayout = widgetLayout?.find(w => w.i === wt.widgetId);
 
@@ -94,11 +94,11 @@ const DisplayView = observer(() => {
     <Html
       rotation={[0, Math.PI, 0]}
       position={[0.2, 0.7, 0.53]}
-      scale={0.02}
+      scale={0.01}
       transform
       occlude='blending'
     >
-      <div style={{width: 1200, height: 700, padding: '0 100px'}} onClick={() => console.log('.')}>
+      <div style={{width: 1200, height: 1900, padding: '0 100px'}} onClick={() => console.log('.')}>
         <PreviewItem widgetLayout={WidgetsStore.savedScene.widgetsLayout} widgetTypes={WidgetsStore.savedScene.widgetsTypes}/>
       </div>
     </Html>
