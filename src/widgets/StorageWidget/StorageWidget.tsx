@@ -10,9 +10,9 @@ export interface StorageI {
 function StorageItem({title, availableStorage}: StorageI) {
     return (
         <div>
-            <Flex vertical gap={4}>
-                <Typography.Paragraph>{title}</Typography.Paragraph>
-                <Typography.Title level={4}>{availableStorage}</Typography.Title>
+            <Flex vertical gap={1}>
+                <Typography.Paragraph style={{ fontSize: '1rem' }}>{title}</Typography.Paragraph>
+                <Typography.Title style={{ fontSize: '4rem' }}>{availableStorage}</Typography.Title>
             </Flex>
 
         </div>

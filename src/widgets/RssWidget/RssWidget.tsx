@@ -10,10 +10,10 @@ export interface RssI {
 function RssItem({ title, availableRss }: RssI) {
     return (
         <div>
-            <Typography.Title level={4}>{title}</Typography.Title>
-            <Typography.Paragraph>{availableRss}</Typography.Paragraph>
+            <Typography.Title style={{ fontSize: '4rem' }}>{title}</Typography.Title>
+            <Typography.Paragraph style={{ fontSize: '1rem' }}>{availableRss}</Typography.Paragraph>
             <Divider/>
-            <Typography.Text>Источник: "Российская Газета"</Typography.Text>
+            <Typography.Text style={{ fontSize: '0.875rem' }}>Источник: "Российская Газета"</Typography.Text>
         </div>
     );
 }
