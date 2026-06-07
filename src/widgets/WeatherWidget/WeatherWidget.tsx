@@ -22,10 +22,10 @@ const WeatherItem = observer(({ title }: WeatherItemProps) => {
         <div>
             <Flex vertical>
                 <Flex align='flex-start' justify="space-between">
-                    <EnvironmentOutlined />
-                    <Typography.Paragraph>{title}</Typography.Paragraph>
+                    <EnvironmentOutlined style={{ fontSize: '1rem' }} />
+                    <Typography.Paragraph style={{ fontSize: '1rem' }}>{title}</Typography.Paragraph>
                 </Flex>
-                <Typography.Title>{parseFloat(temperature).toFixed() + "°"}</Typography.Title>
+                <Typography.Title style={{ fontSize: '4rem' }}>{parseFloat(temperature).toFixed() + "°"}</Typography.Title>
             </Flex>
         </div>
     );

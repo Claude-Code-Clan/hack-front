@@ -13,8 +13,8 @@ export interface NewsI {
 function NewsItem({title, body, date}: NewsI) {
   return (
     <div>
-      <Typography.Title>{title}</Typography.Title>
-      <Typography.Paragraph>{body}</Typography.Paragraph>
+      <Typography.Title style={{ fontSize: '4rem' }}>{title}</Typography.Title>
+      <Typography.Paragraph style={{ fontSize: '1rem' }}>{body}</Typography.Paragraph>
       <Typography.Text type="secondary">{DateTime.fromISO(date).toFormat('dd.MM.yyyy')}</Typography.Text>
     </div>
   );

@@ -1,5 +1,5 @@
 import cls from './ParkingWidget.module.css';
-import {Carousel, Typography} from "antd";
+import {Carousel, Flex, Typography} from "antd";
 
 
 export interface ParkingI {
@@ -10,8 +10,10 @@ export interface ParkingI {
 function ParkingItem({title, availableParking}: ParkingI) {
     return (
         <div>
-            <Typography.Paragraph>{title}</Typography.Paragraph>
-            <Typography.Title>{availableParking}</Typography.Title>
+            <Flex vertical gap={1}>
+                <Typography.Paragraph style={{ fontSize: '0.875rem' }}>{title}</Typography.Paragraph>
+                <Typography.Title style={{ fontSize: '4rem' }}>{availableParking}</Typography.Title>
+            </Flex>
         </div>
     );
 }

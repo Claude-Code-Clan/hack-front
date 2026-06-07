@@ -12,10 +12,10 @@ export interface ApartmentsInfoI {
 function InfoItem({name, rules, trashSchedule, emergencyContacts}: ApartmentsInfoI) {
     return (
         <div>
-            <Typography.Title>{name}</Typography.Title>
-            <Typography.Paragraph>{rules}</Typography.Paragraph>
-            <Typography.Paragraph>{trashSchedule}</Typography.Paragraph>
-            <Typography.Text type="warning">{emergencyContacts}</Typography.Text>
+            <Typography.Title style={{ fontSize: '4rem' }}>{name}</Typography.Title>
+            <Typography.Paragraph style={{ fontSize: '1rem' }}>{rules}</Typography.Paragraph>
+            <Typography.Paragraph style={{ fontSize: '1rem' }}>{trashSchedule}</Typography.Paragraph>
+            <Typography.Text type="warning" style={{ fontSize: '1.25rem' }}>{emergencyContacts}</Typography.Text>
         </div>
     );
 }
