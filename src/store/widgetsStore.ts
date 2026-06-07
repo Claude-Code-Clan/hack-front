@@ -28,6 +28,13 @@ class WidgetsStore {
   private _widgetsLayout: LayoutItem[] = [];
   private _widgetsTypes: WidgetType[] = [];
   private readonly _errorHandler = new ErrorHandler();
+  savedScene: {
+    widgetsLayout: LayoutItem[];
+    widgetsTypes: WidgetType[];
+  } = {
+    widgetsLayout: [],
+    widgetsTypes: [],
+  }
 
   constructor() {
     makeAutoObservable(this);
@@ -49,6 +56,11 @@ class WidgetsStore {
     this._widgetsTypes = widgetsTypes;
   }
 
+  saveTo3DPreview() {
+    this.savedScene.widgetsLayout = this._widgetsLayout;
+    this.savedScene.widgetsTypes = this._widgetsTypes;
+  }
+
   async loadWidgetByDisplayId(displayId: number): Promise<void> {
     try {
       NotificationStore.isLoading = true;
@@ -68,6 +80,7 @@ class WidgetsStore {
           h: widget.h,
         }
       });
+
       NotificationStore.isLoading = false;
     } catch (e: unknown) {
       const errorsConfig: ErrorI[] = [{errorText: 'Не удалось загрузить конфигурацию'}];

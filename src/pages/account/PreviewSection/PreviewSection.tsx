@@ -1,8 +1,9 @@
 import {observer} from "mobx-react";
 import {Card, Modal} from "antd";
 import {LayoutItem} from "react-grid-layout";
-import type {WidgetType} from "../../../store/widgetsStore.ts";
+import WidgetsStore, {type WidgetType} from "../../../store/widgetsStore.ts";
 import HUWidgetsSelector from "../../../components/WidgetsSelector/HUWidgetsSelector.tsx";
+import {useNavigate} from "react-router";
 
 interface PreviewSectionPropsI {
   widgetLayout?: LayoutItem[];
@@ -12,13 +13,20 @@ interface PreviewSectionPropsI {
 }
 
 const PreviewSection = observer(({widgetLayout, widgetTypes, open, onClose}: PreviewSectionPropsI) => {
+  const navigate = useNavigate();
   return (
     <div>
       <Modal
         width={1000}
         open={open}
+        onCancel={onClose}
         cancelButtonProps={{hidden: true, style: {display: 'none'}}}
-        onOk={onClose}
+        onOk={() => {
+          onClose?.();
+          WidgetsStore.saveTo3DPreview();
+          navigate('/account/scene');
+        }}
+        okText='Посмотреть в 3D'
       >
         <div style={{height: 564, position: 'relative'}}>
           {widgetTypes?.map(wt => {

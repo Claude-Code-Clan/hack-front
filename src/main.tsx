@@ -16,6 +16,7 @@ import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import SavedConfigurationsPage from "./pages/account/SavedConfigurations/SavedConfigurationsPage.tsx";
 import CreateConfigPage from "./pages/account/CreateConfigPage/CreateConfigPage.tsx";
+import ScenePage from "./pages/account/ScenePage/ScenePage.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
           {
             path: 'create-config',
             element: <CreateConfigPage/>
+          },
+          {
+            path: 'scene',
+            element: <ScenePage/>
           }
         ],
       },

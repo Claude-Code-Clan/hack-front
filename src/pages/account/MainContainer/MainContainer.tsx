@@ -40,6 +40,16 @@ const segmentedConfig: SegmentedLabeledOption<string>[] = [
   {
     label: (
       <Space>
+        <SaveOutlined />
+        Сцена
+      </Space>
+    ),
+    value: 'scene',
+    disabled: false,
+  },
+  {
+    label: (
+      <Space>
         <EditOutlined />
         Редактировать конфигурацию
       </Space>
