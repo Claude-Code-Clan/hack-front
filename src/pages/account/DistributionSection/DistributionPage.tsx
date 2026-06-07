@@ -20,7 +20,7 @@ const DistributionPage = observer(() => {
     const tree: TreeDataNode[] = [];
     for (const building of buildings) {
       tree.push({
-        title: `Здание ${building.buildingTitle}, ${building.buildingAddress}`,
+        title: `Здание ${building.buildingTitle}`,
         key: `building_${building.id}`,
         children: building.entrances.map(entrance => {
           return ({

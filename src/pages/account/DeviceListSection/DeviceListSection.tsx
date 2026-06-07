@@ -21,7 +21,7 @@ function DeviceItem({deviceId, deviceType, buildingNumber, entranceNumber, build
       <Flex align='center' justify='space-between'>
         <Flex vertical>
           <Typography.Title level={5}>{deviceType}</Typography.Title>
-          <Typography.Text type='secondary'>{buildingAddress} {buildingNumber},
+          <Typography.Text type='secondary'>{buildingNumber},
             подъезд {entranceNumber}</Typography.Text>
         </Flex>
         <Button

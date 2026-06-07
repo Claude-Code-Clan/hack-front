@@ -41,7 +41,7 @@ class DevicesStore {
       for (const entrance of building.entrances) {
         for (const device of entrance.devices) {
           list.push({
-            deviceString: `${building.buildingAddress} ${building.buildingTitle}, подъезд ${entrance.entranceNumber}, ${device.deviceType}`,
+            deviceString: `${building.buildingTitle}, подъезд ${entrance.entranceNumber}, ${device.deviceType}`,
             deviceId: device.id,
             buildingAddress: building.buildingAddress,
             buildingNumber: building.buildingTitle,
