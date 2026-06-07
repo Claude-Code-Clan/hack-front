@@ -25,7 +25,7 @@ const WeatherItem = observer(({ title }: WeatherItemProps) => {
                     <EnvironmentOutlined />
                     <Typography.Paragraph>{title}</Typography.Paragraph>
                 </Flex>
-                <Typography.Title>{temperature}</Typography.Title>
+                <Typography.Title>{parseFloat(temperature).toFixed() + "°"}</Typography.Title>
             </Flex>
         </div>
     );

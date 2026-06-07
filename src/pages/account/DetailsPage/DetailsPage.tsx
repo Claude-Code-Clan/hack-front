@@ -36,6 +36,16 @@ const DetailsPage = observer(() => {
     setConfName('');
   }
 
+  const widgetNames: Record<string, string> = {
+    staticinfo: "Основная информация",
+    news: "Новости",
+    parking: "Парковки",
+    storage: "Кладовые",
+    weather: "Погода",
+    camera: "Камеры",
+    rss: "RSS",
+  };
+
   const addWidget = (type: WidgetTypes) => {
     let maxY = 0;
     WidgetsStore.widgetsLayout.forEach((widget) => {
@@ -119,10 +129,10 @@ const DetailsPage = observer(() => {
       >
         <div>
           {widgetTypes.map((widget) => (
-            <Flex vertical>
+            <Flex vertical key={widget}>
               <Flex align="center" justify="space-between">
-                <Typography.Text>Добавить виджет {widget}</Typography.Text>
-                <Button type='text' key={widget} onClick={() => addWidget(widget)} icon={<PlusOutlined/>}/>
+                <Typography.Text>Добавить виджет {widgetNames[widget]}</Typography.Text>
+                <Button type='text' onClick={() => addWidget(widget)} icon={<PlusOutlined/>}/>
               </Flex>
             </Flex>
           ))}
