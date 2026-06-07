@@ -26,7 +26,7 @@ export default function HUWidgetContainer({children, onDelete}: PropsWithChildre
           />)
         }
       </div>
-      <div>
+      <div style={{height: '100%'}}>
         {children}
       </div>
     </Card>

@@ -11,56 +11,56 @@ import {useRef} from "react";
 import RssWidget from "../../widgets/RssWidget/RssWidget.tsx";
 
 interface HUWidgetSelectorProps {
-    type?: WidgetTypes;
-    children?: React.ReactNode;
+  type?: WidgetTypes;
+  children?: React.ReactNode;
 }
 
-export default function HUWidgetsSelector({type, children}: HUWidgetSelectorProps){
-    switch (type) {
-        case 'staticinfo':
-            return <StaticInfoWidget/>
+export default function HUWidgetsSelector({type}: HUWidgetSelectorProps) {
+  switch (type) {
+    case 'staticinfo':
+      return <StaticInfoWidget/>
 
-        case 'news':
-            return <NewsWidget/>
+    case 'news':
+      return <NewsWidget/>
 
-        case 'parking':
-            return (
-                <ParkingWidget/>
-            )
+    case 'parking':
+      return (
+        <ParkingWidget/>
+      )
 
-        case 'storage':
-            return (
-                <StorageWidget/>
-            )
+    case 'storage':
+      return (
+        <StorageWidget/>
+      )
 
-        case 'weather':
-            return (
-                <WeatherWidget/>
-            )
+    case 'weather':
+      return (
+        <WeatherWidget/>
+      )
 
-        case 'rss':
-            return (
-                <RssWidget/>
-            )
+    case 'rss':
+      return (
+        <RssWidget/>
+      )
 
-        case 'camera':
-            const playerRef = useRef<any>(null);
-            return (
-                <div className={cn(cls.wrapper, 'handle')}>
-                    <ReactHlsPlayer
-                        playerRef={playerRef}
-                        src="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
-                        autoPlay={true}
-                        controls={true}
-                        muted={true}
-                        width="100%"
-                        height="auto"
-                        style={{borderRadius: '20px'}}
-                    />
-                </div>
-            )
+    case 'camera':
+      const playerRef = useRef<any>(null);
+      return (
+        <div className={cls.videoWrapper}>
+          <ReactHlsPlayer
+            playerRef={playerRef}
+            src="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
+            autoPlay={true}
+            controls={true}
+            muted={true}
+            width="100%"
+            height="auto"
+            style={{borderRadius: '5px'}}
+          />
+        </div>
+      )
 
-      default:
-        return null
-    }
+    default:
+      return null
+  }
 }
