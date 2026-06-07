@@ -27,20 +27,20 @@ export interface NewsWidgetPropsI {
 export default function NewsWidget() {
   const news: NewsI[] = [
     {
-      title: 'Заголовок',
-      body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis consectetur, exercitationem inventore odio officia perspiciatis quae quas reiciendis ullam velit?',
+      title: 'Синицы',
+      body: 'Новости нашего двора. Синицы объелись забродившей рябины и гуляют по травке пошатываясь. Если бы синицы могли улыбаться, то они точно бы улыбались',
       date: '2025-12-12',
       liveTime: '1212-12-12',
     },
     {
-      title: 'Заголовок',
-      body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis consectetur, exercitationem inventore odio officia perspiciatis quae quas reiciendis ullam velit?',
+      title: 'Синицы',
+      body: 'Новости нашего двора. Синицы объелись забродившей рябины и гуляют по травке пошатываясь. Если бы синицы могли улыбаться, то они точно бы улыбались',
       date: '2025-12-12',
       liveTime: '1212-12-12',
     },
     {
-      title: 'Заголовок',
-      body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis consectetur, exercitationem inventore odio officia perspiciatis quae quas reiciendis ullam velit?',
+      title: 'Синицы',
+      body: 'Новости нашего двора. Синицы объелись забродившей рябины и гуляют по травке пошатываясь. Если бы синицы могли улыбаться, то они точно бы улыбались',
       date: '2025-12-12',
       liveTime: '1212-12-12',
     },
@@ -48,7 +48,7 @@ export default function NewsWidget() {
 
   return (
     <div className={cls.wrapper}>
-      <Carousel autoplay={{dotDuration: true}} autoplaySpeed={3000}>
+      <Carousel autoplay={{dotDuration: true}} autoplaySpeed={5000}>
         {news.map((newsItem) =>
           (<NewsItem {...newsItem}/>)
         )}
