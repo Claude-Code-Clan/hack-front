@@ -50,7 +50,7 @@ const GridLayoutContainer = observer(({}: GridLayoutPropsI) => {
   }, []);
 
   return (
-    <div className={cls.dotted} ref={containerRef} style={{width: '100%', height: '700px'}}>
+    <div className={cls.dotted} ref={containerRef} style={{width: '100%', height: '1900px'}}>
       <GridLayout
         style={{height: '100%'}}
         width={width}

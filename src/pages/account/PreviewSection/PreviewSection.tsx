@@ -28,7 +28,7 @@ const PreviewSection = observer(({widgetLayout, widgetTypes, open, onClose}: Pre
         }}
         okText='Посмотреть в 3D'
       >
-        <div style={{height: 564, position: 'relative'}}>
+        <div style={{height: 1700, position: 'relative'}}>
           {widgetTypes?.map(wt => {
             const currentLayout = widgetLayout?.find(w => w.i === wt.widgetId);
 
