@@ -37,8 +37,7 @@ const CreateConfigPage = observer(() => {
     storage: "Кладовые",
     weather: "Погода",
     camera: "Камеры",
-    ads: "Реклама",
-    other: "Разное"
+    rss: "RSS",
   };
 
   const addWidget = (type: WidgetTypes) => {

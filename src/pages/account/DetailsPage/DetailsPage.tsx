@@ -38,7 +38,8 @@ const DetailsPage = observer(() => {
     parking: "Парковки",
     storage: "Кладовые",
     weather: "Погода",
-    camera: "Камеры"
+    camera: "Камеры",
+    rss: "RSS",
   };
 
   const addWidget = (type: WidgetTypes) => {

@@ -8,6 +8,7 @@ import StorageWidget from "../../widgets/StorageWidget/StorageWidget.tsx";
 import WeatherWidget from "../../widgets/WeatherWidget/WeatherWidget.tsx";
 import ReactHlsPlayer from 'react-hls-player';
 import {useRef} from "react";
+import RssWidget from "../../widgets/RssWidget/RssWidget.tsx";
 
 interface HUWidgetSelectorProps {
     type?: WidgetTypes;
@@ -35,6 +36,11 @@ export default function HUWidgetsSelector({type, children}: HUWidgetSelectorProp
         case 'weather':
             return (
                 <WeatherWidget/>
+            )
+
+        case 'rss':
+            return (
+                <RssWidget/>
             )
 
         case 'camera':
